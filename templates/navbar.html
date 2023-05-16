@@ -1,5 +1,5 @@
 <!-- 네비게이션바 -->
-<class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
@@ -12,9 +12,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+                    {% else %}
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                    <a class="nav-link" href="#">회원가입</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>
     </div>
-</class>
+</nav>
