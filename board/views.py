@@ -20,7 +20,7 @@ def detail(request, post_id):
 
 def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.create_date = timezone.now()

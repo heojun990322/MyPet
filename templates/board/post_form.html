@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">게시물 작성</h5>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- 오류표시 Start -->
         {% if form.errors %}
@@ -27,6 +27,10 @@
             <label for="content" class="form-label">내용</label>
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image">사진</label>
+            <input type="file" class="form-control" name="image" id="image">
         </div>
         <button type="submit" class="btn btn-primary">업로드</button>
     </form>

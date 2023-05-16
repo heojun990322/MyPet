@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,8 +128,10 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 로그인 성공후 이동하는 URL
+# 로그인/로그아웃 후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'
-
-# 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
+
+# 이미지 파일의 경로 설정
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
