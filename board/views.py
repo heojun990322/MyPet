@@ -3,6 +3,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -18,11 +19,13 @@ def detail(request, post_id):
     context = {'post': post}
     return render(request, 'board/post_detail.html', context)
 
+@login_required(login_url='common:login')
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            post.author = request.user  # author 속성에 로그인 계정 저장
             post.create_date = timezone.now()
             post.save()
             return redirect('board:index')
